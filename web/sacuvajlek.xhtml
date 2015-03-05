@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./templateMenu.xhtml">
+
+            <ui:define name="content">
+                <f:view>
+                    <h:form>
+                        <p:growl id="growl" showDetail="true" sticky="true" />
+                        <h1><h:outputText value="Unesite podatke o novom leku"/></h1>
+                        <p:panelGrid columns="2">
+                            <p:outputLabel value="Naziv:" for="naziv" />
+                            <p:inputText id="naziv" value="#{mbSacuvajLek.lek.naziv}" title="Naziv" required="true" requiredMessage="The Naziv field is required."/>
+                            <p:outputLabel value="GenerickiNaziv:" for="generickiNaziv" />
+                            <p:inputText id="generickiNaziv" value="#{mbSacuvajLek.lek.generickiNaziv}" title="GenerickiNaziv" required="true" requiredMessage="The GenerickiNaziv field is required."/>
+                            <p:outputLabel value="Proizvodjac:" for="proizvodjac" />
+                            <p:inputText id="proizvodjac" value="#{mbSacuvajLek.lek.proizvodjac}" title="Proizvodjac" required="true" requiredMessage="The Proizvodjac field is required."/>
+                            <p:outputLabel value="NosiocDozvola:" for="nosiocDozvola" />
+                            <p:inputText id="nosiocDozvola" value="#{mbSacuvajLek.lek.nosiocDozvola}" title="NosiocDozvola" required="true" requiredMessage="The NosiocDozvola field is required."/>
+                            <p:outputLabel value="RezimIzdavanja:" for="rezimIzdavanja" />
+                            <p:inputText id="rezimIzdavanja" value="#{mbSacuvajLek.lek.rezimIzdavanja}" title="RezimIzdavanja" required="true" requiredMessage="The RezimIzdavanja field is required."/>
+                            <p:outputLabel value="Atc:" for="atc" />
+                            <p:inputText id="atc" value="#{mbSacuvajLek.lek.atc}" title="Atc" required="true" requiredMessage="The Atc field is required."/>
+                            <p:outputLabel value="Jkl:" for="jkl" />
+                            <p:inputText id="jkl" value="#{mbSacuvajLek.lek.jkl}" title="Jkl" required="true" requiredMessage="The Jkl field is required."/>
+                            <p:outputLabel value="BrojResenja:" for="brojResenja" />
+                            <p:inputText id="brojResenja" value="#{mbSacuvajLek.lek.brojResenja}" title="BrojResenja" required="true" requiredMessage="The BrojResenja field is required."/>
+                            <p:outputLabel value="DatumResenja:" for="datumResenja" />
+                            <p:calendar pattern="dd-MM-yyyy" id="datumResenja" value="#{mbSacuvajLek.lek.datumResenja}" title="DatumResenja" required="true" requiredMessage="The DatumResenja field is required."/>  
+                            <p:outputLabel value="VrstaLeka:" for="vrstaLeka" />
+                            <p:inputText id="vrstaLeka" value="#{mbSacuvajLek.lek.vrstaLeka}" title="VrstaLeka" required="true" requiredMessage="The VrstaLeka field is required."/>
+                            <p:outputLabel value="Cena:" for="cena" />
+                            <p:inputText id="cena" value="#{mbSacuvajLek.lek.cena}" title="Cena" required="true" requiredMessage="The Cena field is required."/>
+                        </p:panelGrid>
+                        <p:commandButton value="Sacuvaj novi lek" action="#{mbSacuvajLek.sacuvajLekMB()}" ajax="false"/>
+                    </h:form>
+                </f:view>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

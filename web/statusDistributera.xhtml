@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./templateMenu.xhtml">
+
+            <ui:define name="content">
+                
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="Broj izdatih otpremnica"/>
+                    <p:outputLabel value="#{mbStatusDistributera.botpremljenih}"/>
+                    
+                    <p:outputLabel value="Broj potvrdjenih otpremnica"/>
+                    <p:outputLabel value="#{mbStatusDistributera.bpotvrdjenih}"/>
+                    
+                    <p:outputLabel value="Broj nepotvrdjenih otpremnica"/>
+                    <p:outputLabel value="#{mbStatusDistributera.bnepotvrdjenih}"/>
+                    
+                    <p:outputLabel value="Broj kvantitativnih kvalitativnih kontrola"/>
+                    <p:outputLabel value="#{mbStatusDistributera.bkkk}"/>
+                </p:panelGrid>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="./templateMenuZus.xhtml">
+         <ui:define name="content">
+        <h:form>
+            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+            <p:panelGrid columns="2">
+                <h:outputLabel value="Otpremnica ID: "/> 
+            <p:selectOneMenu value="#{mbGenerisanjePrijemnice.otpremnica.otpremnicaID}">
+                <f:selectItems value="#{mbGenerisanjePrijemnice.listaOtpremnicaZaGenerisanje}" var="lo" itemLabel="#{lo.brojOtpremnice}" itemValue="#{lo.otpremnicaID}"/>
+            </p:selectOneMenu>
+            </p:panelGrid>
+            <p:dataTable value="#{mbGenerisanjePrijemnice.otpremnica.stavkaotpremniceList}" var="ol">
+                <p:column>
+                    <f:facet name="header">
+                                <h:outputText value="Redni broj: "/>
+                    </f:facet>
+                    <h:outputLabel value="#{ol.stavkaotpremnicePK.stavkaotpremniceRB}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                                <h:outputText value="Lek serijski broj: "/>
+                    </f:facet>
+                    <h:outputLabel value="#{ol.lekSerijskiBroj.lekSerijskiBroj}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                                <h:outputText value="Kolicina: "/>
+                    </f:facet>
+                    <h:outputLabel value="#{ol.kolicina}"/>
+                </p:column>
+            </p:dataTable>
+            <p:commandButton value="Generisi prijemnicu" actionListener="#{mbGenerisanjePrijemnice.vratiGenerisanuPrijemnicu()}" ajax="false"/>
+            
+            
+            <h2>Generisana prijemnica</h2>
+            <p:panelGrid columns="2">
+            <h:outputLabel value="Na osnovu otpremnice:"/>
+            <h:outputLabel value="#{mbGenerisanjePrijemnice.prijemnica.otpremnicaID.brojOtpremnice}"/>
+           
+           <h:outputLabel value="Prijemnica ID:"/>
+           <h:outputLabel value="#{mbGenerisanjePrijemnice.prijemnica.brojPrijemnice}"/>  
+            
+            <h:outputLabel value="Datum:"/>
+            <p:calendar pattern="dd-MM-yyyy" value="#{mbGenerisanjePrijemnice.prijemnica.datum}"  />
+            </p:panelGrid>
+            <p:dataTable value="#{mbGenerisanjePrijemnice.prijemnica.stavkaprijemniceList}" var="pl">
+                <p:column>
+                    <f:facet name="header">
+                                <h:outputText value="Prijemnica ID: "/>
+                    </f:facet>
+                    <h:outputLabel value="#{pl.stavkaprijemnicePK.prijemnicaID}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                                <h:outputText value="Redni broj: "/>
+                    </f:facet>
+                    <h:outputLabel value="#{pl.stavkaprijemnicePK.stavkaprijemniceRB}"/>
+                </p:column>
+               <p:column> 
+                    <f:facet name="header">
+                                <h:outputText value="Lek serijski broj: "/>
+                    </f:facet>
+                   <h:outputLabel value="#{pl.lekSerijskiBroj.lekSerijskiBroj}"/>
+                </p:column>
+               <p:column> 
+                    <f:facet name="header">
+                                <h:outputText value="Kolicina: "/>
+                    </f:facet>
+                   <h:inputText value="#{pl.kolicina}"/>
+                </p:column>
+            </p:dataTable>       
+            
+            <h:panelGrid columns="1" >  
+          
+                <p:commandButton value="Potvrdi otpremnicu" onclick="confirmation.show()" type="button" ajax="false"/>  
+            </h:panelGrid>
+            
+            <p:confirmDialog message="Da li ste sigurni da zelite da potvrdite otpremnicu?"  
+                showEffect="bounce" hideEffect="explode"  
+                header="Provera sigurnosti" severity="alert" widgetVar="confirmation">  
+                  
+        <p:commandButton value="Da" update="messages" oncomplete="confirmation.hide()"  
+                         actionListener="#{mbGenerisanjePrijemnice.sacuvajPrijemnicuMB()}" />  
+        <p:commandButton value="Ne" onclick="confirmation.hide()" type="button" />   
+                  
+            </p:confirmDialog>
+
+        </h:form>
+             </ui:define>
+            </ui:composition>
+    </h:body>
+</html>
+

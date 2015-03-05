@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./templateMenu.xhtml">
+
+            <ui:define name="content">
+                <h:form>
+            <p:panelGrid columns="2">
+                <h:outputLabel value="Otpremnica ID: "    />
+                <p:selectOneMenu value="#{mbPretragaKkkZaD.kkk.kkkID}" >
+                    <f:selectItems value="#{mbPretragaKkkZaD.listaKkkZaD}" var="ki" itemLabel="#{ki.brojKkk}" itemValue="#{ki.kkkID}"/>
+                </p:selectOneMenu>      
+                  
+                <h:outputLabel value="Datum:"/>
+                <h:outputText value="#{mbPretragaKkkZaD.kkk.datum}">
+                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                </h:outputText>
+                
+                <p:outputLabel value="Dokument se odnosi na neslaganje otpremnice broj: #{mbPretragaKkkZaD.kkk.otpremnicaID.brojOtpremnice} sa prijemnicom broj:#{mbPretragaKkkZaD.kkk.prijemnicaID.brojPrijemnice} zdravstvene ustanove #{mbPretragaKkkZaD.kkk.prijemnicaID.zusID.naziv}"/>
+            </p:panelGrid>
+            
+            <f:view>
+                <h:form>
+                    <p:outputLabel value="Stavke kvantitativne kvalitativne kontrole"/>
+                    <p:dataTable value="#{mbPretragaKkkZaD.kkk.stavkakkkList}" var="k">
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Redni broj: "/>
+                            </f:facet>
+                            <h:outputText value="#{k.stavkakkkPK.stavkaKKKRB}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Lek: "/>
+                            </f:facet>
+                            <h:outputText value="#{k.lekSerijskiBroj.naziv}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Kolicina: "/>
+                            </f:facet>
+                            <h:outputText value="#{k.kolicina}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Iznos: "/>
+                            </f:facet>
+                            <h:outputText value="#{k.kolicina*k.lekSerijskiBroj.cena}"/>
+                        </p:column>
+                    </p:dataTable>
+                    <p:commandButton value="Prikazi stavke kvantitativne kvalitativne kontrole" actionListener="#{mbPretragaKkkZaD.vratiKkkPoIDMBZaD()}" ajax="false"/>
+                </h:form>
+            </f:view>
+                
+        </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

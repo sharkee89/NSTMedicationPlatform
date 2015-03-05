@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Pretraga otpremnice</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="./templateMenu.xhtml">
+            <ui:define name="top">
+                Pretraga otpremnice
+            </ui:define>
+            <ui:define name="content">
+            <h:form>
+            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="Otpremnica ID:"/>
+                    <p:selectOneMenu value="#{mbPretragaOtpremnice.otpremnica.otpremnicaID}">
+                        <f:selectItems value="#{mbPretragaOtpremnice.listaOtpremnica}" var="otp" itemLabel="#{otp.brojOtpremnice}" itemValue="#{otp.otpremnicaID}"/>
+                    </p:selectOneMenu>
+                    
+                    <p:outputLabel value="Datum:"/>
+                    <p:outputLabel value="#{mbPretragaOtpremnice.otpremnica.datum}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />   
+                    </p:outputLabel>
+                    
+                    <p:outputLabel value="Otpremnica glasi na:"/>
+                    <p:outputLabel value="#{mbPretragaOtpremnice.otpremnica.zusID.naziv}"/>   
+                </p:panelGrid>
+
+                <p:dataTable var="stavka" value="#{mbPretragaOtpremnice.otpremnica.stavkaotpremniceList}"
+                             selectionMode="single" selection="#{mbPretragaOtpremnice.selektovanaStavka}"
+                             rowKey="#{stavka.stavkaotpremnicePK.stavkaotpremniceRB}">
+                    <p:column headerText="Redni broj" sortBy="#{stavka.stavkaotpremnicePK.stavkaotpremniceRB}">
+                        <h:outputLabel value="#{stavka.stavkaotpremnicePK.stavkaotpremniceRB}"/>
+                    </p:column>
+                    <p:column headerText="Lek" sortBy="#{stavka.lekSerijskiBroj.naziv}">
+                        <h:outputLabel value="#{stavka.lekSerijskiBroj.naziv}"/>
+                    </p:column>
+                    <p:column headerText="Kolicina" sortBy="#{stavka.kolicina}">
+                        <h:outputLabel value="#{stavka.kolicina}"/>
+                    </p:column>
+                    <p:column headerText="Cena" sortBy="#{stavka.lekSerijskiBroj.cena}">
+                        <h:outputLabel value="#{stavka.lekSerijskiBroj.cena}"/>
+                    </p:column>
+                    <p:column headerText="Iznos" sortBy="#{stavka.kolicina*stavka.lekSerijskiBroj.cena}">
+                        <h:outputLabel value="#{stavka.kolicina*stavka.lekSerijskiBroj.cena}"/>
+                    </p:column>
+                </p:dataTable>
+                <p:commandButton value="Prikazi stavke otpremnice" actionListener="#{mbPretragaOtpremnice.vratiOtpremnicuMB()}" ajax="false"/>
+                <p:commandButton value="Obrisi otpremnicu"  icon="ui-icon-closethick" actionListener="#{mbPretragaOtpremnice.izbrisiOtpremnicuMB()}" ajax="false" /> 
+            </h:form>
+                </ui:define>
+            </ui:composition>
+    </h:body>
+</html>
+

@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="./css/default.css"/>
+        <h:outputStylesheet name="./css/cssLayout.css"/>
+        <title>Facelets Template</title>
+    </h:head>
+
+    <h:body>
+        <img alt="full screen background image" src="../resources/slike/ludaci.jpg" id="full-screen-background-image"/>
+        <div id="top" class="top">
+            <h:form>
+            <p:menubar>
+                <p:menuitem value="Pocetna" action="pocetnaZus.xhtml" ajax="false"/>
+                <p:menuitem value="Generisi novu prijemnicu (#{mbPrikazNegenerisanih.brojacNegenerisanih})" action="generisanjePrijemnice.xhtml" ajax="false"/>
+                <p:submenu label="Rad sa prijemnicama">
+                    <p:menuitem value="Prikazi sve prijemnice" action="prijemnice.xhtml" ajax="false"/>
+                </p:submenu>
+                <p:submenu label="Rad sa kvantitativnim kvalitativnim kontrolama">
+                    <p:menuitem value="Prikazi Kvantitativne kvalitativne kontrole" action="pretragaKkk" ajax="false"/> 
+                </p:submenu>
+                
+                <p:menuitem value="Izloguj se" action="#{mbLogout.izlogujSe()}" ajax="false"/>
+            </p:menubar>
+         </h:form>
+        </div>
+
+        <div id="content" class="center_content">
+            <ui:insert name="content">Content</ui:insert>
+        </div>
+
+    </h:body>
+
+</html>

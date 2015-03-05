@@ -1,0 +1,161 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Izdavanje otpremnice</title>
+    </h:head>
+    <body>
+        <script type="text/javascript">
+           var validate = function(evt){
+                var theEvent = evt || window.event;
+                var key = theEvent.keyCode || theEvent.which;
+                key = String.fromCharCode( key );
+                var regex = /[0-9]|\./;
+                if( !regex.test(key) ) {
+                  theEvent.returnValue = false;
+                  if(theEvent.preventDefault) theEvent.preventDefault();
+                }
+              }
+        </script>
+
+        <ui:composition template="./templateMenu.xhtml">
+            
+            <ui:define name="top">
+                Izdavanje otpremnice
+            </ui:define>
+            <ui:define name="content">
+                <h:form id="frmSacuvajOtpremnicu">
+                    <p:growl id="growl" showDetail="true" sticky="true" />
+                    <p:panelGrid columns="2">
+
+                        
+                        <h:outputLabel value="Datum:"/>
+                        <p:calendar pattern="dd-MM-yyyy" value="#{mbIzdavanjeOtpremnice.trenutnaOtpremnica.datum}" required="true" requiredMessage="Morate uneti datum otpremnice">
+                            
+                        </p:calendar>
+                        
+                        <h:outputLabel value="Otpremnica glasi na:"/>
+                        <p:selectOneMenu value="#{mbIzdavanjeOtpremnice.trenutnaOtpremnica.zusID}">
+                            <f:selectItems value="#{mbIzdavanjeOtpremnice.listaZus}" var="z" itemLabel="#{z.naziv}" itemValue="#{z}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <br/><br/>
+                    
+                    <h3>Izaberite lek koji zelite da dodate:</h3>
+                   
+                    <p:dataTable id="frmSelektLek" value="#{mbIzdavanjeOtpremnice.listaLekova}" var="lek"
+                                         selectionMode="single" selection="#{mbIzdavanjeOtpremnice.selektovaniLek}"
+                                         rowKey="#{lek.lekSerijskiBroj}" scrollable="true" scrollHeight="100"
+                                         >
+                        <p:column width="50" headerText="Lek" sortBy="#{lek.naziv}" filterMatchMode="contains" filterBy="#{lek.naziv}">
+                                    <p:outputLabel value="#{lek.naziv}"/>
+                                </p:column>
+                        <p:column width="50" headerText="Genericki naziv" sortBy="#{lek.generickiNaziv}" filterMatchMode="contains" filterBy="#{lek.generickiNaziv}">
+                                    <p:outputLabel value="#{lek.generickiNaziv}"/>
+                                </p:column>
+                        <p:column width="50" headerText="Proizvodjac" sortBy="#{lek.proizvodjac}" filterMatchMode="contains" filterBy="#{lek.proizvodjac}">
+                                    <p:outputLabel value="#{lek.proizvodjac}"/>
+                                </p:column>
+                        <p:column width="50" headerText="Cena" sortBy="#{lek.cena}" filterMatchMode="contains" filterBy="#{lek.cena}">
+                                    <p:outputLabel value="#{lek.cena}"/>
+                                </p:column>
+                        <p:column width="50" headerText="Nosioc dozvola" sortBy="#{lek.nosiocDozvola}" filterMatchMode="contains" filterBy="#{lek.nosiocDozvola}">
+                                    <p:outputLabel value="#{lek.nosiocDozvola}"/>
+                                </p:column>
+                        <p:column width="50" headerText="Rezim izdavanja" sortBy="#{lek.rezimIzdavanja}" filterMatchMode="contains" filterBy="#{lek.rezimIzdavanja}">
+                                    <p:outputLabel value="#{lek.rezimIzdavanja}"/>
+                                </p:column>
+                        <p:column width="50" headerText="ATC" sortBy="#{lek.atc}" filterMatchMode="contains" filterBy="#{lek.atc}">
+                                    <p:outputLabel value="#{lek.atc}"/>
+                                </p:column>
+                                <p:column width="50" headerText="JKL" sortBy="#{lek.jkl}" filterMatchMode="contains" filterBy="#{lek.jkl}">
+                                    <p:outputLabel value="#{lek.jkl}"/>
+                                </p:column>
+                        <p:column width="50" headerText="Broj resenja" sortBy="#{lek.brojResenja}" filterMatchMode="contains" filterBy="#{lek.brojResenja}">
+                                    <p:outputLabel value="#{lek.brojResenja}"/>
+                                </p:column>
+                        <p:column width="50" headerText="Datum resenja" sortBy="#{lek.datumResenja}" filterMatchMode="contains" filterBy="#{lek.datumResenja}">
+                                    <h:outputText value="#{lek.datumResenja}">
+                                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                                    </h:outputText>
+                                </p:column>
+                        <p:column width="50" headerText="Vrsta leka" sortBy="#{lek.vrstaLeka}" filterMatchMode="contains" filterBy="#{lek.vrstaLeka}">
+                                    <p:outputLabel value="#{lek.vrstaLeka}"/>
+                                </p:column>
+                            </p:dataTable>
+                            
+
+                         <h:panelGrid id="pnlUnosStavke" columns="2">   
+                             Kolicina:<h:inputText onkeypress="validate(event)" class="kolicina-class" value="#{mbIzdavanjeOtpremnice.novaStavka.kolicina}" required="true" requiredMessage="Morate uneti kolicinu leka koji izdajete">
+                                 
+                             </h:inputText>                                                            
+                        </h:panelGrid>
+                    <p:commandButton value="Dodaj stavku" icon="ui-icon-circle-triangle-s" actionListener="#{mbIzdavanjeOtpremnice.dodajStavku()}" ajax="false" update="frmSelektLek"/>
+                    <p:commandButton value="Unesi novi lek" action="sacuvajlek.xhtml" ajax="false"/>
+                    <br/><br/>
+                    <p:dataTable style="width: 50%" id="tblStavkeRacuna" value="#{mbIzdavanjeOtpremnice.trenutnaOtpremnica.stavkaotpremniceList}" var="stavka" editable="true"
+                                 selectionMode="single" selection="#{mbIzdavanjeOtpremnice.selektovanaStavka}"
+                                 rowKey="#{stavka.stavkaotpremnicePK.stavkaotpremniceRB}">
+                        <p:column >
+                            <f:facet name="header">
+                                <h:outputText value="Redni broj: "/>
+                            </f:facet>
+                            <h:inputText value="#{stavka.stavkaotpremnicePK.stavkaotpremniceRB}" />
+                        </p:column>
+                        <p:column >
+                            <f:facet name="header">
+                                <h:outputText value="Naziv leka: "/>
+                            </f:facet>
+                            <h:outputLabel value="#{stavka.lekSerijskiBroj.naziv}" />                                
+                        </p:column>
+                        <p:column headerText="Kolicina">
+                            <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{stavka.kolicina}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{stavka.kolicina}"/>
+                            </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column >
+                            <f:facet name="header">
+                                <h:outputText value="Cena: "/>
+                            </f:facet>
+                            <h:outputLabel value="#{stavka.lekSerijskiBroj.cena}" />                                
+                        </p:column>
+                        <p:column >
+                            <f:facet name="header">
+                                <h:outputText value="Iznos: "/>
+                            </f:facet>
+                            <h:outputLabel value="#{stavka.kolicina*stavka.lekSerijskiBroj.cena}" />                                
+                        </p:column>
+                        <p:column>
+                            <p:rowEditor/>
+                        </p:column>
+                    </p:dataTable>
+                  
+                    <p:commandButton value="Sacuvaj otpremnicu"  icon="ui-icon-disk" actionListener="#{mbIzdavanjeOtpremnice.sacuvajOtpremnicuMB()}" ajax="false" /> 
+                   
+                    <c:if test="${mbIzdavanjeOtpremnice.brojacIzbrisiStavku > 0}">
+                        <p:commandButton value="Izbrisi stavku" icon="ui-icon-closethick" actionListener="#{mbIzdavanjeOtpremnice.izbrisiStavku()}" ajax="false"/>
+                    </c:if>
+                    
+                    
+
+                </h:form>
+
+            </ui:define>
+
+            <ui:define name="bottom">
+                bottom
+            </ui:define>
+
+        </ui:composition>
+    </body>
+</html>

@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./templateMenu.xhtml">
+            <ui:define name="top">
+                Lista lekova:
+            </ui:define>
+            <ui:define name="content">
+                <p:dataTable value="#{mbPrikazLekova.listaLekova}" var="lek">
+                    <p:column headerText="Lek serijski broj" sortBy="#{lek.lekSerijskiBroj}">
+                        <h:outputLabel value="#{lek.lekSerijskiBroj}"/>
+                    </p:column>
+                    <p:column headerText="Naziv" sortBy="#{lek.naziv}">
+                        <h:outputLabel value="#{lek.naziv}"/>
+                    </p:column>
+                    <p:column headerText="Genericki naziv" sortBy="#{lek.generickiNaziv}">
+                        <h:outputLabel value="#{lek.generickiNaziv}"/>
+                    </p:column>
+                    <p:column headerText="Cena" sortBy="#{lek.cena}">
+                        <h:outputLabel value="#{lek.cena}"/>
+                    </p:column>
+                    <p:column headerText="Proizvodjac" sortBy="#{lek.proizvodjac}">
+                        <h:outputLabel value="#{lek.proizvodjac}"/>
+                    </p:column>
+                    <p:column headerText="Nosioc dozvola" sortBy="#{lek.nosiocDozvola}">
+                        <h:outputLabel value="#{lek.nosiocDozvola}"/>
+                    </p:column>
+                    <p:column headerText="Rezim izdavanja" sortBy="#{lek.rezimIzdavanja}">
+                        <h:outputLabel value="#{lek.rezimIzdavanja}"/>
+                    </p:column>
+                    <p:column headerText="ATC" sortBy="#{lek.atc}">
+                        <h:outputLabel value="#{lek.atc}"/>
+                    </p:column>
+                    <p:column headerText="JKL" sortBy="#{lek.jkl}">
+                        <h:outputLabel value="#{lek.jkl}"/>
+                    </p:column>
+                    <p:column headerText="Broj resenja" sortBy="#{lek.brojResenja}">
+                        <h:outputLabel value="#{lek.brojResenja}"/>
+                    </p:column>
+                    <p:column headerText="Datum resenja" sortBy="#{lek.datumResenja}">
+                        <h:outputLabel value="#{lek.datumResenja}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputLabel>
+                    </p:column>
+                    <p:column headerText="Vrsta leka" sortBy="#{lek.vrstaLeka}">
+                        <h:outputLabel value="#{lek.vrstaLeka}"/>
+                    </p:column>    
+                </p:dataTable>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

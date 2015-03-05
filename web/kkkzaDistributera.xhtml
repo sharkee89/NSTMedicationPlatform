@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./templateMenu.xhtml">
+
+            <ui:define name="content">
+                <f:view>
+                    <h:form>
+                        
+                        <p:dataTable value="#{mbPrikaziKkk.listaKkk}" var="item"
+                                     selectionMode="single" selection="#{mbPrikaziKkk.selektovanKkk}"
+                                     rowKey="#{item.brojKkk}"
+                                     >
+                            <p:column>
+                                <p:rowToggler/>
+                            </p:column>
+                            <p:column style="text-align: center" filterMatchMode="contains" filterBy="#{item.brojKkk}" sortBy="#{item.brojKkk}">
+                                <f:facet name="header">
+                                    <h:outputText value="Broj"/>
+                                </f:facet>
+                                <h:outputText value="#{item.brojKkk}"/>
+                            </p:column>
+                            <p:column style="text-align: center" filterMatchMode="contains" filterBy="#{item.datum}" sortBy="#{item.datum}">
+                                <f:facet name="header">
+                                    <h:outputText value="Datum"/>
+                                </f:facet>
+                                <h:outputText value="#{item.datum}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column style="text-align: center" filterMatchMode="contains" filterBy="#{item.prijemnicaID.zusID.naziv}" sortBy="#{item.prijemnicaID.zusID.naziv}">
+                                <f:facet name="header">
+                                    <h:outputText value="Roba otpremljena"/>
+                                </f:facet>
+                                <h:outputText value="#{item.prijemnicaID.zusID.naziv}"/>
+                            </p:column> 
+                            <p:column style="text-align: center" filterMatchMode="contains" filterBy="#{item.otpremnicaID.brojOtpremnice}" sortBy="#{item.otpremnicaID.brojOtpremnice}">
+                                <f:facet name="header">
+                                    <h:outputText value="Broj otpremnice"/>
+                                </f:facet>
+                                <h:outputText value="#{item.otpremnicaID.brojOtpremnice}"/>
+                            </p:column>
+                            <p:column style="text-align: center" filterMatchMode="contains" filterBy="#{item.prijemnicaID.brojPrijemnice}" sortBy="#{item.prijemnicaID.brojPrijemnices}">
+                                <f:facet name="header">
+                                    <h:outputText value="Broj prijemnice"/>
+                                </f:facet>
+                                <h:outputText value="#{item.prijemnicaID.brojPrijemnice}"/>
+                            </p:column>                            
+                            <p:rowExpansion>
+                                <p:dataTable value="#{item.stavkakkkList}" var="kkk"
+                                             selectionMode="single" selection="#{kkk}"
+                                             rowKey="#{kkk.stavkakkkPK.stavkaKKKRB}"
+                                             >
+                                    <p:column headerText="Redni broj" style="text-align: center" filterMatchMode="contains" filterBy="#{kkk.stavkakkkPK.stavkaKKKRB}" sortBy="#{kkk.stavkakkkPK.stavkaKKKRB}">
+                                        <h:outputLabel value="#{kkk.stavkakkkPK.stavkaKKKRB}"/>
+                                    </p:column>
+                                    <p:column headerText="Lek" style="text-align: center" filterMatchMode="contains" filterBy="#{kkk.lekSerijskiBroj.naziv}" sortBy="#{kkk.lekSerijskiBroj.naziv}">
+                                        <h:outputLabel value="#{kkk.lekSerijskiBroj.naziv}"/>
+                                    </p:column>
+                                    <p:column headerText="Kolicina" style="text-align: center" filterMatchMode="contains" filterBy="#{kkk.kolicina}" sortBy="#{kkk.kolicina}">
+                                        <h:outputLabel value="#{kkk.kolicina}"/>
+                                    </p:column>
+                                    <p:column headerText="Cena" style="text-align: center" filterMatchMode="contains" filterBy="#{kkk.lekSerijskiBroj.cena}" sortBy="#{kkk.lekSerijskiBroj.cena}">
+                                        <h:outputLabel value="#{kkk.lekSerijskiBroj.cena}"/>
+                                    </p:column>
+                                    <p:column headerText="Iznos" style="text-align: center" filterMatchMode="contains" filterBy="#{kkk.kolicina*kkk.lekSerijskiBroj.cena}" sortBy="#{kkk.kolicina*kkk.lekSerijskiBroj.cena}">
+                                        <h:outputLabel value="#{kkk.kolicina*kkk.lekSerijskiBroj.cena}"/>
+                                    </p:column>
+                                </p:dataTable>
+                            </p:rowExpansion>
+                        </p:dataTable>
+                    </h:form>
+                </f:view>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
