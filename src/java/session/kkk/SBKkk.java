@@ -55,4 +55,14 @@ public class SBKkk implements SBKkkLocal{
         }
                 
     }
+
+    @Override
+    public Kvalitativnakvantitativnakontrola vratiKKKPoPID(int id) {
+        return  (Kvalitativnakvantitativnakontrola) em.createQuery("SELECT k FROM Kvalitativnakvantitativnakontrola k WHERE k.prijemnicaID.prijemnicaID = :priID").setParameter("priID", id).getResultList().get(0);
+    }
+
+    @Override
+    public Kvalitativnakvantitativnakontrola vratiKKKPoOID(int id) {
+        return  (Kvalitativnakvantitativnakontrola) em.createQuery("SELECT k FROM Kvalitativnakvantitativnakontrola k WHERE k.otpremnicaID.otpremnicaID = :otpID").setParameter("otpID", id).getResultList().get(0);
+    }
 }

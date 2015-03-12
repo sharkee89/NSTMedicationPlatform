@@ -2,41 +2,40 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
-        <title>Prijemnica</title>
+        <title>Otpremnice</title>
     </h:head>
     <h:body>
-        <ui:composition template="./templateMenu.xhtml">
+        <ui:composition template="./templateMenuZus.xhtml">
             <ui:define name="top">
                 Lista otpremnica
             </ui:define>
             <ui:define name="content">
         <f:view>
             <h:form>
-                
                 <p:panelGrid columns="2">
 
                         
                         <h:outputLabel value="Datum:"/>
-                        <p:calendar pattern="dd-MM-yyyy" value="#{mbPrikazPrijemnice.prijemnica.datum}" required="true" requiredMessage="Morate uneti datum otpremnice">
+                        <p:calendar pattern="dd-MM-yyyy" value="#{mbPrikazOtpremnice.otpremnica.datum}" required="true" requiredMessage="Morate uneti datum otpremnice">
                             
                         </p:calendar>
                         
-                        <h:outputLabel value="Prijemnica glasi na:"/>
-                        <h:outputText value="#{mbPrikazPrijemnice.prijemnica.zusID.naziv}" />
+                        <h:outputLabel value="Otpremnica izdata od:"/>
+                        <h:outputText value="#{mbPrikazOtpremnice.otpremnica.distributerID.naziv}" />
                     </p:panelGrid>
                 
-                
                 <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
-                <p:dataTable value="#{mbPrikazPrijemnice.prijemnica.stavkaprijemniceList}" var="item">
+                <p:dataTable value="#{mbPrikazOtpremnice.otpremnica.stavkaotpremniceList}" var="item">
                     <p:column>
                         <f:facet name="header">
                                  <h:outputText value="Redni broj"/>
                              </f:facet>
-                        <h:outputText value="#{item.stavkaprijemnicePK.stavkaprijemniceRB}"/>
+                        <h:outputText value="#{item.stavkaotpremnicePK.stavkaotpremniceRB}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
@@ -62,11 +61,10 @@
                         <f:facet name="header">
                                  <h:outputText value="Iznos"/>
                              </f:facet>
-                        <h:outputText value="#{item.lekSerijskiBroj.cena * item.lekSerijskiBroj.cena}"/>
+                        <h:outputText value="#{item.lekSerijskiBroj.cena * item.kolicina}"/>
                     </p:column>
                 </p:dataTable>
-            </h:form>       
-            
+            </h:form>
         </f:view>
                 </ui:define>
             </ui:composition>

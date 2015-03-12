@@ -6,49 +6,42 @@
 
 package mb;
 
-import domen.Otpremnica;
+import domen.Kvalitativnakvantitativnakontrola;
 import domen.Prijemnica;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.ViewScoped;
-import javax.faces.model.SelectItem;
-import session.otpremnica.SBOtpremnicaLocal;
+import session.kkk.SBKkkLocal;
 import session.prijemnica.SBPrijemnicaLocal;
 
 /**
  *
  * @author Stefan
  */
-@ManagedBean( name = "mbPrikazPrijemnice")
+@ManagedBean( name = "mbPrikazKKKZaPrijemnicu")
 @RequestScoped
-public class MBPrikazPrijemnice implements Serializable{
+public class MBPrikazKKKZaPrijemnicu {
     
-    private Prijemnica prijemnica;
+    private Kvalitativnakvantitativnakontrola kkk;
     @EJB
-    private SBPrijemnicaLocal prijemnicaFacade;
+    private SBKkkLocal kkkFacade;
     @ManagedProperty(value = "#{mbSesija}")
     MBSesija mbSesija;
     
     @PostConstruct
     public void inicijalizujPodatke(){
-        prijemnica = new Prijemnica();
+        kkk = new Kvalitativnakvantitativnakontrola();
     }
 
-    public Prijemnica getPrijemnica() {
-        return prijemnica;
+    public Kvalitativnakvantitativnakontrola getKkk() {
+        return kkk;
     }
 
-    public void setPrijemnica(Prijemnica prijemnica) {
-        this.prijemnica = prijemnica;
+    public void setKkk(Kvalitativnakvantitativnakontrola kkk) {
+        this.kkk = kkk;
     }
-
-    
 
     public MBSesija getMbSesija() {
         return mbSesija;
@@ -58,8 +51,10 @@ public class MBPrikazPrijemnice implements Serializable{
         this.mbSesija = mbSesija;
     }
     
-    public String prikaziOtpremnicu(int idS){
-        prijemnica = prijemnicaFacade.vratiPrijemnicuPoOtpID(idS);
-        return "prijemnica";
+    public String prikaziKKKZaPrijemnicu(int id){
+        
+        kkk = kkkFacade.vratiKKKPoPID(id);
+        return "kkkzaprijemnicu";
     }
+    
 }

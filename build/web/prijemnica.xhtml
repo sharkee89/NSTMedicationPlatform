@@ -6,24 +6,70 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Prijemnice</title>
+        <title>Prijemnica</title>
     </h:head>
     <h:body>
-      <ui:composition template="./templateMenu.xhtml">
-         <ui:define name="content">
+        <ui:composition template="./templateMenu.xhtml">
+            <ui:define name="top">
+                Lista otpremnica
+            </ui:define>
+            <ui:define name="content">
+        <f:view>
+            <h:form>
+                
+                <p:panelGrid columns="2">
 
-                     Lista prijemnica:
-                     <p:dataTable value="#{mbPrikazOtpremnica.}" var="prijemnica">
-                       
-                         <p:column headerText="Broj prijemnice">
-                             <h:outputLabel value="asdasdasd"/>
-                         </p:column>
-
-                     </p:dataTable>
-
-
-         </ui:define>
-         </ui:composition>
+                        
+                        <h:outputLabel value="Datum:"/>
+                        <p:calendar pattern="dd-MM-yyyy" value="#{mbPrikazPrijemnice.prijemnica.datum}" required="true" requiredMessage="Morate uneti datum otpremnice">
+                            
+                        </p:calendar>
+                        
+                        <h:outputLabel value="Prijemnica glasi na:"/>
+                        <h:outputText value="#{mbPrikazPrijemnice.prijemnica.zusID.naziv}" />
+                    </p:panelGrid>
+                
+                
+                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+                <p:dataTable value="#{mbPrikazPrijemnice.prijemnica.stavkaprijemniceList}" var="item">
+                    <p:column>
+                        <f:facet name="header">
+                                 <h:outputText value="Redni broj"/>
+                             </f:facet>
+                        <h:outputText value="#{item.stavkaprijemnicePK.stavkaprijemniceRB}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                                 <h:outputText value="Naziv leka"/>
+                             </f:facet>
+                        <h:outputText value="#{item.lekSerijskiBroj.naziv}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                                 <h:outputText value="Kolicina"/>
+                             </f:facet>
+                        <h:outputText value="#{item.kolicina}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                                 <h:outputText value="Cena"/>
+                             </f:facet>
+                        <h:outputText value="#{item.lekSerijskiBroj.cena}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                                 <h:outputText value="Iznos"/>
+                             </f:facet>
+                        <h:outputText value="#{item.lekSerijskiBroj.cena * item.lekSerijskiBroj.cena}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>       
+            
+        </f:view>
+                </ui:define>
+            </ui:composition>
     </h:body>
 </html>
 

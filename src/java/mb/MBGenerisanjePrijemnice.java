@@ -218,7 +218,7 @@ public class MBGenerisanjePrijemnice implements Serializable{
             kkkFacade.sacuvajKkk(kkk);
         }
         // ovde nesto ne valja treba da se vrati na pocetnu zus 
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Sistem ne moze da kreira novu prijemnicu", ""));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sistem je kreirao prijemnicu", ""));
         listaOtpremnicaZaGenerisanje.clear();
         prijemnica = new Prijemnica();
         return "pocetnaZus.xhtml";

@@ -22,6 +22,8 @@ public interface SBPrijemnicaLocal {
     
     public Prijemnica vratiPrijemnicuPoID(Integer id);
     
+    public Prijemnica vratiPrijemnicuPoOtpID(Integer id);
+    
     public void sacuvajPrijemnicu(Prijemnica pri);
     
     public int vratiRB();

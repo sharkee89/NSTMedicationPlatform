@@ -28,4 +28,8 @@ public interface SBKkkLocal {
     
     public EntityManager vratiEM();
     
+    public Kvalitativnakvantitativnakontrola vratiKKKPoPID(int id);
+    
+    public Kvalitativnakvantitativnakontrola vratiKKKPoOID(int id);
+    
 }

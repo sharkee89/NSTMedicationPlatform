@@ -7,17 +7,13 @@
 package mb;
 
 import domen.Otpremnica;
-import domen.Prijemnica;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
-import javax.faces.model.SelectItem;
 import session.otpremnica.SBOtpremnicaLocal;
 import session.prijemnica.SBPrijemnicaLocal;
 
@@ -25,30 +21,28 @@ import session.prijemnica.SBPrijemnicaLocal;
  *
  * @author Stefan
  */
-@ManagedBean( name = "mbPrikazPrijemnice")
+@ManagedBean (name = "mbPrikazOtpremnice")
 @RequestScoped
-public class MBPrikazPrijemnice implements Serializable{
+public class MBPrikazOtpremnice implements Serializable{
     
-    private Prijemnica prijemnica;
+    private Otpremnica otpremnica;
     @EJB
-    private SBPrijemnicaLocal prijemnicaFacade;
+    private SBOtpremnicaLocal otpremnicaFacade;
     @ManagedProperty(value = "#{mbSesija}")
     MBSesija mbSesija;
     
     @PostConstruct
     public void inicijalizujPodatke(){
-        prijemnica = new Prijemnica();
+        otpremnica = new Otpremnica();
     }
 
-    public Prijemnica getPrijemnica() {
-        return prijemnica;
+    public Otpremnica getOtpremnica() {
+        return otpremnica;
     }
 
-    public void setPrijemnica(Prijemnica prijemnica) {
-        this.prijemnica = prijemnica;
+    public void setOtpremnica(Otpremnica otpremnica) {
+        this.otpremnica = otpremnica;
     }
-
-    
 
     public MBSesija getMbSesija() {
         return mbSesija;
@@ -59,7 +53,9 @@ public class MBPrikazPrijemnice implements Serializable{
     }
     
     public String prikaziOtpremnicu(int idS){
-        prijemnica = prijemnicaFacade.vratiPrijemnicuPoOtpID(idS);
-        return "prijemnica";
+        otpremnica = otpremnicaFacade.vratiOtpremnicaPoID(idS);
+        return "otpremnica";
     }
+    
+    
 }

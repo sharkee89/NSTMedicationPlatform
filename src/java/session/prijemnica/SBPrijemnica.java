@@ -58,4 +58,9 @@ public class SBPrijemnica implements SBPrijemnicaLocal{
         }
                 
     }
+
+    @Override
+    public Prijemnica vratiPrijemnicuPoOtpID(Integer id) {
+        return  (Prijemnica) em.createQuery("SELECT p FROM Prijemnica p WHERE p.otpremnicaID.otpremnicaID = :otpID").setParameter("otpID", id).getResultList().get(0);
+    }
 }

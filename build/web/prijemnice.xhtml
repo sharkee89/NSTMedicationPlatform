@@ -33,6 +33,12 @@
                          <p:column headerText="Otpremnica izdata od">
                              <h:outputLabel value="#{item.otpremnicaID.distributerID.naziv}"/>
                          </p:column>
+                         <p:column headerText="Otpremnica ">
+                             <p:commandButton value="Prikazi otpremnicu" action="#{mbPrikazOtpremnice.prikaziOtpremnicu(item.otpremnicaID.otpremnicaID)}" ajax="false"/>
+                         </p:column>
+                         <p:column headerText="Kvantitativna kvalitativna kontrola">
+                             <p:commandButton value="Prikazi K.K.K." action="#{mbPrikazKKKZaPrijemnicu.prikaziKKKZaPrijemnicu(item.prijemnicaID)}" rendered="#{not empty item.kvalitativnakvantitativnakontrolaList}" ajax="false"/>
+                         </p:column>
                          <p:column>
                              <f:facet name="header">
                                  <h:outputText value="Datum"/>
@@ -46,16 +52,16 @@
                                  <p:column headerText="Redni broj">
                                      <h:outputLabel value="#{spr.stavkaprijemnicePK.stavkaprijemniceRB}"/>
                                  </p:column>
-                                 <p:column headerText="Redni broj">
+                                 <p:column headerText="Naziv leka">
                                      <h:outputLabel value="#{spr.lekSerijskiBroj.naziv}"/>
                                  </p:column>
-                                 <p:column headerText="Redni broj">
+                                 <p:column headerText="Kolicina">
                                      <h:outputLabel value="#{spr.kolicina}"/>
                                  </p:column>
-                                 <p:column headerText="Redni broj">
+                                 <p:column headerText="Cena">
                                      <h:outputLabel value="#{spr.lekSerijskiBroj.cena}"/>
                                  </p:column>
-                                 <p:column headerText="Redni broj">
+                                 <p:column headerText="Iznos">
                                      <h:outputLabel value="#{spr.kolicina*spr.lekSerijskiBroj.cena}"/>
                                  </p:column>
                              </p:dataTable>

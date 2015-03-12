@@ -91,9 +91,16 @@
                             
 
                          <h:panelGrid id="pnlUnosStavke" columns="2">   
-                             Kolicina:<h:inputText onkeypress="validate(event)" class="kolicina-class" value="#{mbIzdavanjeOtpremnice.novaStavka.kolicina}" required="true" requiredMessage="Morate uneti kolicinu leka koji izdajete">
-                                 
-                             </h:inputText>                                                            
+                             Kolicina:
+                             <!--<h:inputText onkeypress="validate(event)" class="kolicina-class" value="#{mbIzdavanjeOtpremnice.novaStavka.kolicina}" required="true" requiredMessage="Morate uneti kolicinu leka koji izdajete">-->
+                             <p:inputMask 
+                                mask="9?9999"
+                                maxlength="3" 
+                                value="#{mbIzdavanjeOtpremnice.novaStavka.kolicina}" 
+                                required="true" 
+                                requiredMessage="Morate uneti kolicinu leka koji izdajete"
+                                placeHolder=""/>
+                                                                                         
                         </h:panelGrid>
                     <p:commandButton value="Dodaj stavku" icon="ui-icon-circle-triangle-s" actionListener="#{mbIzdavanjeOtpremnice.dodajStavku()}" ajax="false" update="frmSelektLek"/>
                     <p:commandButton value="Unesi novi lek" action="sacuvajlek.xhtml" ajax="false"/>
